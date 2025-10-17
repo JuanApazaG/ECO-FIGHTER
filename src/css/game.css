@@ -3,4 +3,43 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+}
+
+/* Audio oculto */
+.game audio {
+    display: none;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .game {
+        width: 100vw;
+        height: 100vh;
+        flex-direction: row; /* Mantener horizontal */
+        justify-content: center;
+        align-items: flex-start;
+        padding-bottom: 140px; /* Espacio para controles móviles GRANDES */
+        padding-top: 60px; /* Espacio para score panel (ahora 60px) */
+        gap: 0;
+    }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+    .game {
+        padding-bottom: 140px;
+        padding-top: 55px; /* Score panel 55px en móvil pequeño */
+    }
+}
+
+/* Landscape con altura limitada */
+@media (max-height: 500px) and (orientation: landscape) {
+    .game {
+        padding-bottom: 100px;
+        padding-top: 45px;
+    }
 }

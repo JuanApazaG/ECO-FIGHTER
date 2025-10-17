@@ -1,20 +1,25 @@
 .window {
     margin: auto;
-    width: 840px;
+    width: 100%;
+    max-width: 840px;
     height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     background: #EEEEEF;
+    overflow-y: auto;
 }
 
 .window__header {
-    height: 200px;
+    height: 100px;
     background-size: cover;
+    background-position: center;
 }
 
 .window__header--small {
-    height: 100px;
+    height: 70px;
     background: #4CAF50;
 }
 
@@ -27,46 +32,56 @@
 }
 
 .window__caption {
-    font-size: 56px;
+    font-size: 32px;
     font-family: 'Roboto', sans-serif;
     color: white;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-weight: bold;
 }
 
 .window__button-container {
-    margin-bottom: 50px;
+    margin-bottom: clamp(15px, 5%, 50px);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: clamp(10px, 3%, 20px);
 }
 
 .choose-level-button {
-    margin: 20px 70px;
+    margin: clamp(10px, 3%, 20px) clamp(20px, 5%, 70px);
 }
 
 .window-back {
-    align-self: left;
-    margin: 20px;
+    align-self: flex-start;
+    margin: clamp(10px, 2%, 20px);
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
 }
 
 .window__text {
     text-align: center;
-    color: #425B64;
+    color: #2c3e50;
     font-family: 'Roboto', sans-serif;
-    font-size: 24px;
-    width: 150px;
-    margin: 10px auto;
-    line-height: 26px;
+    font-size: clamp(14px, 4vw, 24px);
+    width: clamp(100px, 80%, 150px);
+    margin: clamp(5px, 2%, 10px) auto;
+    line-height: 1.4;
+    font-weight: 600;
 }
 
 .car-container {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: clamp(10px, 3%, 20px);
 }
 
 .car-button-container {
-    width: 150px;
-    min-height: 150px;
-    margin: 50px;
+    width: clamp(100px, 20vw, 150px);
+    min-height: clamp(100px, 20vw, 150px);
+    margin: clamp(20px, 3%, 50px);
 }
 
 .container-checked {
@@ -74,66 +89,215 @@
 }
 
 .choose-car-button {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     background: #EEEEEF;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .choose-car-button:hover {
-    width: 100px;
-    height: 100px;
     background: #425B64;
+    border-color: #C2185B;
 }
 
 .car-image {
     height: 90%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.window__middle-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: clamp(10px, 3%, 20px);
+}
+
+.arrows {
+    height: clamp(100px, 20vw, 200px);
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.start-button {
+    display: block;
+    margin: clamp(15px, 3%, 30px) auto;
+    font-size: clamp(24px, 6vw, 56px);
+    font-weight: bold;
+    width: clamp(120px, 70%, 400px);
+    height: clamp(50px, 10vw, 90px);
+    min-height: 48px;
+    min-width: 48px;
+    background-color: #E91E63 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    touch-action: manipulation;
+}
+
+.start-button:active {
+    transform: scale(0.98);
+    background-color: #C2185B !important;
+}
+
+.start-button:hover {
+    background-color: #EC407A !important;
+}
+
+.window__table {
+    margin: clamp(10px, 3%, 30px) auto;
+    width: clamp(200px, 85%, 70%);
+}
+
+.window__table__caption {
+    text-align: left;
+    font-family: 'Roboto', sans-serif;
+    font-size: clamp(18px, 5vw, 28px);
+    margin-bottom: clamp(5px, 2%, 10px);
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.bottom-button-container {
+    width: clamp(200px, 85%, 70%);
+    margin: clamp(10px, 3%, 30px) auto;
+    display: flex;
+    justify-content: space-between;
+    gap: clamp(10px, 2%, 20px);
+    flex-wrap: wrap;
 }
 
 .window-next {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+    position: static;
+    margin: clamp(10px, 3%, 20px);
+    min-height: 44px;
+    min-width: 44px;
+    touch-action: manipulation;
 }
 
 .text-right {
     justify-content: flex-end;
 }
 
-.window__middle-wrapper {
-    display: flex;
-    justify-content: left;
-    align-items: flex-end;
+/* ============================================
+   RESPONSIVE - MÓVIL (igual que web)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .window {
+        padding: 15px;
+        max-width: 100%;
+    }
+    
+    .window__header {
+        height: 80px;
+    }
+    
+    .window__header--small {
+        height: 60px;
+    }
+    
+    .window__caption {
+        font-size: 24px;
+    }
+
+    .window__table {
+        width: 85%;
+    }
+
+    .bottom-button-container {
+        width: 85%;
+        gap: 15px;
+    }
+    
+    .window__text {
+        font-size: 16px;
+        width: 70%;
+    }
+    
+    .car-button-container {
+        width: 120px;
+        min-height: 120px;
+        margin: 15px;
+    }
+    
+    .choose-level-button {
+        margin: 15px 30px;
+        min-width: 200px;
+    }
 }
 
-.arrows {
-    height: 200px;
+@media (max-width: 599px) {
+    .window__caption {
+        font-size: 20px;
+    }
+    
+    .window__text {
+        font-size: 14px;
+    }
 }
 
-.start-button {
-    display: block;
-    margin: 0 auto;
-    font-size: 56px;
+/* ============================================
+   LANDSCAPE
+   ============================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .window__header {
+        height: clamp(60px, 12vh, 100px);
+    }
+
+    .window__header--small {
+        height: clamp(40px, 8vh, 60px);
+    }
+
+    .window__caption {
+        font-size: clamp(18px, 5vh, 32px);
+    }
+
+    .window__button-container {
+        margin-bottom: 10px;
+    }
+
+    .start-button {
+        font-size: clamp(14px, 4vh, 28px);
+        height: clamp(40px, 8vh, 70px);
+    }
+}
+
+/* ============================================
+   TABLAS - ASEGURAR CONTRASTE
+   ============================================ */
+
+.mdl-data-table {
+    background: white;
+    color: #2c3e50;
+}
+
+.mdl-data-table thead {
+    background: #ecf0f1;
+}
+
+.mdl-data-table thead th {
+    color: #2c3e50;
     font-weight: bold;
-    width: 30%;
-    height: 90px;
 }
 
-.window__table {
-    margin: 0 auto;
-    width: 70%;
+.mdl-data-table tbody tr {
+    background: white;
 }
 
-.window__table__caption {
-    text-align: left;
-    font-family: 'Roboto', sans-serif;
-    font-size: 28px;
-    margin-bottom: 10px;
-    color: #425B64;
+.mdl-data-table tbody td {
+    color: #34495e;
+    font-weight: 500;
 }
 
-.bottom-button-container {
-    width: 70%;
-    margin: 0 auto 10px;
-    display: flex;
-    justify-content: space-between;
+.mdl-data-table tbody tr:hover {
+    background: #f8f9fa;
 }

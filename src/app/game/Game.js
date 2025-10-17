@@ -7,6 +7,7 @@ import RoadCanvas from './RoadCanvas';
 import StreetCanvas from './StreetCanvas';
 import ProgressCanvas from './ProgressCanvas';
 import ScorePanel from './ScorePanel';
+import MobileControls from '../components/MobileControls';
 
 class Game extends Component {
   constructor(props) {
@@ -16,6 +17,7 @@ class Game extends Component {
       commonProgress: 0,
       time: 0,
       collisionCount: 0,
+      isMobile: false,
       keyUpDownHandlers: {
         up: {
           left: [], top: [], right: [], bottom: []
@@ -34,6 +36,7 @@ class Game extends Component {
     this.onKeyUpDown = this.onKeyUpDown.bind(this);
     this.collisionInc = this.collisionInc.bind(this);
     this.playerFinishedHandler = this.playerFinishedHandler.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
   
   timerInc() {
@@ -108,7 +111,12 @@ class Game extends Component {
       }
     }
   }
-  
+
+  handleResize() {
+    const isMobile = window.innerWidth < 768;
+    this.setState({ isMobile });
+  }
+
   collisionInc() {
     this.setState(state => ({
       collisionCount: state.collisionCount + 1,
@@ -116,8 +124,14 @@ class Game extends Component {
   }
   
   componentDidMount() {
+    // Soportar controles de teclado (desktop)
     this.props.doc.onkeydown = this.onKeyUpDown('down');
     this.props.doc.onkeyup = this.onKeyUpDown('up');
+    
+    // Detectar si es móvil
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+    
     this.timerId = setInterval(
       () => this.timerInc(),
       1000
@@ -126,6 +140,7 @@ class Game extends Component {
   
   componentWillUnmount() {
     clearInterval(this.timerId);
+    window.removeEventListener('resize', this.handleResize);
   }
   
   playerFinishedHandler() {
@@ -142,12 +157,13 @@ class Game extends Component {
       playerFinishedHandler
     } = this;
     
-    const { commonProgress, collisionCount, time } = this.state;
+    const { commonProgress, collisionCount, time, isMobile } = this.state;
     const playerCar = loadImg.playerCars[this.props.playerCar];
     
     let long = 35 + this.props.level * 5;
-    let imgW = 55;
-    let imgH = 110;
+    // Autos más pequeños en móvil
+    let imgW = isMobile ? 45 : 55;
+    let imgH = isMobile ? 90 : 110;
     const userCar = { img: playerCar, width: imgW, height: imgH };
     const botCarsImgs = loadImg.botCars.map(img => ({ img, width: imgW, height: imgH }));
     
@@ -166,9 +182,25 @@ class Game extends Component {
           clearKeyUpDownHandlers={clearKeyUpDownHandlers}
           collisionInc={collisionInc}
           playerFinishedHandler={playerFinishedHandler}
+          isMobile={isMobile}
         />
         <StreetCanvas progress={commonProgress} side={'right'} long={long}/>
         <ScorePanel time={time} collisionCount={collisionCount}/>
+        
+        {/* Controles táctiles para móvil */}
+        {isMobile && (
+          <MobileControls
+            onLeftStart={() => this.onKeyUpDown('down')({ keyCode: 37 })}
+            onLeftEnd={() => this.onKeyUpDown('up')({ keyCode: 37 })}
+            onRightStart={() => this.onKeyUpDown('down')({ keyCode: 39 })}
+            onRightEnd={() => this.onKeyUpDown('up')({ keyCode: 39 })}
+            onAccelerateStart={() => this.onKeyUpDown('down')({ keyCode: 38 })}
+            onAccelerateEnd={() => this.onKeyUpDown('up')({ keyCode: 38 })}
+            onBrakeStart={() => this.onKeyUpDown('down')({ keyCode: 40 })}
+            onBrakeEnd={() => this.onKeyUpDown('up')({ keyCode: 40 })}
+            isVisible={isMobile}
+          />
+        )}
       </div>
     );
   }

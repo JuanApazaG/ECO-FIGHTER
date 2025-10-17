@@ -1,10 +1,61 @@
+/* Reset y estilos base */
+* {
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+}
+
 html, body {
     padding: 0;
     margin: 0;
     height: 100%;
+    width: 100%;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+    overflow: hidden;
+    position: fixed;
 }
 
 #root {
     height: 100%;
     width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* Soportar safe areas (notch, home indicator) */
+    padding: max(0px, env(safe-area-inset-top)) 
+             max(0px, env(safe-area-inset-right)) 
+             max(0px, env(safe-area-inset-bottom)) 
+             max(0px, env(safe-area-inset-left));
+}
+
+/* Prevenir comportamientos por defecto en móvil */
+input, button, textarea, select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+button {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+/* Optimizaciones para rendimiento */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dispositivos touch-friendly */
+@media (hover: none) and (pointer: coarse) {
+    /* Estilos para dispositivos táctiles */
+    button, input {
+        min-height: 48px;
+        min-width: 48px;
+    }
 }

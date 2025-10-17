@@ -3,3 +3,24 @@
     height: 100%;
     display: block;
 }
+
+/* Móvil: calles más anchas para que se vean los edificios */
+@media (max-width: 768px) {
+    .street {
+        width: 60px;
+    }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+    .street {
+        width: 50px;
+    }
+}
+
+/* Ultra pequeño */
+@media (max-width: 380px) {
+    .street {
+        width: 45px;
+    }
+}

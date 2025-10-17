@@ -2,4 +2,47 @@
     width: 350px;
     height: 100%;
     display: block;
+    max-width: 100%;
+}
+
+/* Responsive para móvil */
+@media (max-width: 768px) {
+    .road {
+        width: calc(100vw - 120px - 50px);
+        /* 100vw - (2 * street 60px) - (progress 50px MÁS ANCHO) */
+        min-width: 150px;
+        max-width: 240px;
+        height: calc(100% - 105px);
+        max-height: calc(100vh - 105px);
+    }
+}
+
+/* Teléfonos pequeños */
+@media (max-width: 480px) {
+    .road {
+        width: calc(100vw - 100px - 45px);
+        /* 100vw - (2 * street 50px) - (progress 45px MÁS VISIBLE) */
+        min-width: 135px;
+        max-width: 210px;
+        height: calc(100% - 100px);
+        max-height: calc(100vh - 100px);
+    }
+}
+
+/* Ultra pequeño */
+@media (max-width: 380px) {
+    .road {
+        width: calc(100vw - 90px - 45px);
+        /* 100vw - (2 * street 45px) - (progress 45px) */
+        min-width: 125px;
+        max-width: 195px;
+    }
+}
+
+/* Landscape */
+@media (max-height: 500px) and (orientation: landscape) {
+    .road {
+        height: calc(100vh - 100px);
+        max-height: calc(100vh - 100px);
+    }
 }

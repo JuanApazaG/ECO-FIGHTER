@@ -1,0 +1,98 @@
+<!-- 
+  Archivo de prueba para verificar la adaptación móvil
+  Abre este archivo en consola para verificar que todo funciona
+-->
+
+<script>
+  console.log('=== VERIFICACIÓN DE ADAPTACIÓN MÓVIL ===\n');
+
+  // 1. Verificar viewport
+  const viewport = document.querySelector('meta[name="viewport"]');
+  console.log('✅ Viewport configurado:', viewport?.getAttribute('content'));
+
+  // 2. Verificar safe-area
+  const computedStyle = getComputedStyle(document.documentElement);
+  console.log('✅ Safe-area inset-top:', getComputedStyle(document.body).paddingTop);
+
+  // 3. Verificar CSS media queries
+  const isMobile = window.matchMedia('(max-width: 768px)').matches;
+  const isTablet = window.matchMedia('(max-width: 1024px)').matches;
+  const isTouchDevice = () => {
+    return (
+      (typeof window !== 'undefined' && 
+        ('ontouchstart' in window ||
+          navigator.maxTouchPoints > 0 ||
+          navigator.msMaxTouchPoints > 0))
+    );
+  };
+
+  console.log('\n=== INFORMACIÓN DE DISPOSITIVO ===');
+  console.log('📱 Es móvil:', isMobile);
+  console.log('📱 Es tablet:', isTablet);
+  console.log('👆 Es dispositivo táctil:', isTouchDevice());
+  console.log('🖥️  Ancho de pantalla:', window.innerWidth);
+  console.log('📏 Alto de pantalla:', window.innerHeight);
+  console.log('📐 Relación aspecto:', (window.innerWidth / window.innerHeight).toFixed(2));
+
+  // 4. Verificar archivos CSS cargados
+  console.log('\n=== ESTILOS CARGADOS ===');
+  const stylesheets = Array.from(document.styleSheets)
+    .filter(sheet => {
+      try {
+        return sheet.cssRules;
+      } catch(e) {
+        return false;
+      }
+    })
+    .map(sheet => {
+      const href = sheet.href || 'inline';
+      return href.split('/').pop();
+    });
+  
+  console.log('📄 Hojas de estilo:', stylesheets);
+
+  // 5. Verificar componentes React
+  console.log('\n=== COMPONENTES REACT ===');
+  const root = document.getElementById('root');
+  if (root && root.children.length > 0) {
+    console.log('✅ App montada correctamente');
+    console.log('✅ Contenedor root existe');
+  }
+
+  // 6. Verificar controles móviles
+  console.log('\n=== VERIFICAR CONTROLES MÓVILES ===');
+  if (isMobile) {
+    const mobileControls = document.querySelector('.mobile-controls');
+    if (mobileControls) {
+      console.log('✅ Controles móviles renderizados');
+      const buttons = mobileControls.querySelectorAll('button');
+      console.log(`✅ ${buttons.length} botones de control encontrados`);
+    } else {
+      console.log('⏳ Controles móviles aún no cargados (espera a que React monte)');
+    }
+  } else {
+    console.log('ℹ️  Dispositivo no es móvil, controles móviles no visibles');
+  }
+
+  // 7. Verificar eventos táctiles
+  console.log('\n=== SOPORTE TÁCTIL ===');
+  console.log('✅ Evento ontouchstart:', 'ontouchstart' in window);
+  console.log('✅ Navigator.maxTouchPoints:', navigator.maxTouchPoints);
+  console.log('✅ Pointer events:', window.PointerEvent ? 'soportado' : 'no soportado');
+
+  // 8. Recomendaciones
+  console.log('\n=== RECOMENDACIONES ===');
+  if (isMobile) {
+    console.log('📱 MODO MÓVIL DETECTADO');
+    console.log('   - Los controles táctiles deberían ser visibles');
+    console.log('   - Usa los botones en la parte inferior');
+    console.log('   - Prueba rotando el dispositivo');
+  } else {
+    console.log('🖥️  MODO DESKTOP DETECTADO');
+    console.log('   - Usa las teclas de flecha para controlar');
+    console.log('   - Abre DevTools (F12) y activa "Toggle device toolbar"');
+    console.log('   - Selecciona un dispositivo móvil para probar');
+  }
+
+  console.log('\n=== PRUEBAS COMPLETADAS ===\n');
+</script>

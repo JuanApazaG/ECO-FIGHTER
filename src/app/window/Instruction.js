@@ -39,14 +39,15 @@ const Instruction = ({ onClickHandler, backClickHandler }) => (
       onClick={onClickHandler}
       style={{background: '#2ecc71'}}
     >
-      🌱 ¡EMPEZAR MISIÓN!
+      EMPEZAR
     </button>
     <button
       className="window-back mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
       onClick={backClickHandler}
-      style={{background: '#16a085'}}
+      style={{background: '#16a085', color: '#ffffff'}}
+      title="Volver"
     >
-      <i className="material-icons">arrow_back</i>
+      <i className="material-icons" style={{fontSize: '24px'}}>arrow_back</i>
     </button>
   </div>
 );

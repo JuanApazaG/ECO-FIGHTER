@@ -54,7 +54,7 @@ const Start = props => (
       onClick={() => props.onClickHandler && props.onClickHandler()}
       style={{background: '#27ae60', boxShadow: '0 4px 12px rgba(39, 174, 96, 0.4)'}}
     >
-      🎮 JUGAR AHORA
+      JUGAR
     </button>
   </div>
 );

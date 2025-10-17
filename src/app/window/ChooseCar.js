@@ -56,16 +56,18 @@ class ChooseCar extends Component {
         <button
           className="window-back mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
           onClick={backClickHandler}
-          style={{background: '#16a085'}}
+          style={{background: '#16a085', color: '#ffffff'}}
+          title="Volver"
         >
-          <i className="material-icons">arrow_back</i>
+          <i className="material-icons" style={{fontSize: '24px'}}>arrow_back</i>
         </button>
         <button
           className="window-next mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
           onClick={forwardClickHandler}
-          style={{background: '#27ae60'}}
+          style={{background: '#27ae60', color: '#ffffff'}}
+          title="Continuar"
         >
-          <i className="material-icons">arrow_forward</i>
+          <i className="material-icons" style={{fontSize: '24px'}}>arrow_forward</i>
         </button>
       </div>
     )
